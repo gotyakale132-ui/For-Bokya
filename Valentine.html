@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bokya ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fbe4e9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #card {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            width: 320px;
+            z-index: 10;
+        }
+
+        .heart-icon {
+            font-size: 80px;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cat-gif { 
+            width: 220px; 
+            margin-bottom: 20px; 
+            border-radius: 15px; 
+        }
+
+        h1 { color: #333; font-size: 1.6rem; margin-bottom: 30px; line-height: 1.4; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #yesBtn { background: #ff4d6d; color: white; }
+        #yesBtn:hover { transform: scale(1.1); }
+
+        #noBtn {
+            background: #adb5bd;
+            color: white;
+            position: absolute;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="card">
+        <div id="ask-screen">
+            <span class="heart-icon">❤️</span>
+            <h1>Bokya, will you be my Valentine?</h1>
+            <div class="btn-container">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="success-screen" class="hidden">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3emR6eHZwbm9pYm96Ym96Ym96Ym96Ym96Ym96Ym96Ym96JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/GeimqsH0TLDt4tScGw/giphy.gif" class="cat-gif" alt="Happy Cat">
+            <h1 style="color: #ff4d6d;">YAY! Happy Happy Happy! 🥰</h1>
+        </div>
+    </div>
+
+    <audio id="happyMusic" loop>
+        <source src="https://raw.githubusercontent.com/Real-Kranti/Valentine-Day/main/happy-happy-happy-cat.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const askScreen = document.getElementById('ask-screen');
+        const successScreen = document.getElementById('success-screen');
+        const music = document.getElementById('happyMusic');
+
+        // Logic for the "No" button jumping away
+        const moveButton = () => {
+            const padding = 50;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+            const randomX = Math.floor(Math.random() * (maxX - padding) + padding);
+            const randomY = Math.floor(Math.random() * (maxY - padding) + padding);
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        };
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+
+        // Yes button logic: Triggers the Cat and the Music
+        yesBtn.addEventListener('click', () => {
+            askScreen.classList.add('hidden');
+            successScreen.classList.remove('hidden');
+            noBtn.style.display = 'none';
+            
+            // Play the "Happy Happy Happy" song
+            music.play().catch(error => console.log("Audio waiting for user interaction"));
+        });
+    </script>
+</body>
+</html>

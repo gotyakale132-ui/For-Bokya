@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bokya ❤️</title>
+    <style>
+        body { margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; background-color: #fbe4e9; font-family: sans-serif; overflow: hidden; }
+        #card { text-align: center; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 320px; z-index: 10; }
+        .heart { font-size: 70px; color: #ff4d6d; margin-bottom: 20px; display: block; }
+        .cat-gif { width: 100%; max-width: 220px; border-radius: 15px; margin-bottom: 20px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 30px; }
+        .btn-container { display: flex; justify-content: center; gap: 20px; height: 50px; }
+        button { padding: 12px 25px; font-size: 1rem; font-weight: bold; border: none; border-radius: 15px; cursor: pointer; transition: 0.2s; }
+        #yesBtn { background: #ff4d6d; color: white; }
+        #noBtn { background: #ddd; color: #555; position: absolute; transition: 0.1s; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="card">
+        <div id="ask-screen">
+            <span class="heart">❤️</span>
+            <h1>Bokya, will you be my Valentine?</h1>
+            <div class="btn-container">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+        <div id="success-screen" class="hidden">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3emR6eHZwbm9pYm96Ym96Ym96Ym96Ym96Ym96Ym96Ym96JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/GeimqsH0TLDt4tScGw/giphy.gif" class="cat-gif">
+            <h1 style="color: #ff4d6d;">YAY! 🥰</h1>
+        </div>
+    </div>
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const askScreen = document.getElementById('ask-screen');
+        const successScreen = document.getElementById('success-screen');
+        const moveButton = () => {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            noBtn.style.left = Math.floor(Math.random() * maxX) + 'px';
+            noBtn.style.top = Math.floor(Math.random() * maxY) + 'px';
+        };
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+        yesBtn.addEventListener('click', () => {
+            askScreen.classList.add('hidden');
+            successScreen.classList.remove('hidden');
+            noBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
